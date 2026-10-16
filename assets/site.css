@@ -374,7 +374,7 @@ footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 footer a{color:#D5D8DC;text-decoration:none}
 footer a:hover{color:#fff;text-decoration:underline}
 .foot-big{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:clamp(56px,13vw,200px);line-height:.8;color:#36393E;letter-spacing:-.01em;margin-top:clamp(40px,6vw,72px);white-space:nowrap;overflow:hidden;user-select:none}
-.foot-base{border-top:1px solid var(--line-dark);padding:20px 0 28px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:14px}
+.foot-base{border-top:1px solid var(--line-dark);padding:20px var(--gut) 28px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:14px}
 
 /* mobile call bar */
 .callbar{display:none}
@@ -592,3 +592,19 @@ footer .brand-plate img{height:72px}
   .rv.in .tag::before,.sec-head.in .tag::before{animation:spinIn .5s var(--ease) both}
   @keyframes spinIn{from{transform:rotate(-90deg) scale(0)}to{transform:none}}
 }
+
+/* Google map embed */
+.gmap{margin:0;border:2px solid var(--line-dark);background:#33363B}
+.gmap iframe{display:block;width:100%;height:var(--h,480px);border:0;filter:grayscale(.15) contrast(1.05)}
+.gmap figcaption{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 16px;padding:10px 14px;background:var(--char);color:#D3D6DA;font-size:14.5px;border-top:3px solid var(--red)}
+.gmap figcaption span{display:inline-flex;align-items:center;gap:8px}
+.gmap figcaption .ico{width:16px;height:16px;color:var(--red-bright)}
+.gmap figcaption a{display:inline-flex;align-items:center;gap:6px;min-height:44px;color:#fff;font-family:var(--display);font-weight:700;letter-spacing:.05em;text-transform:uppercase;text-decoration:none}
+.gmap figcaption a:hover{color:var(--red-bright)}
+.gmap figcaption a .ico{width:16px;height:16px;color:currentColor}
+.gmap-sm{margin-top:24px;border-color:var(--ink)}
+@media (max-width:640px){.gmap iframe{height:min(var(--h,480px),340px)}}
+.foot-map{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.2fr);gap:clamp(20px,4vw,56px);align-items:start;margin-top:clamp(40px,5vw,64px);padding-top:clamp(32px,4vw,48px);border-top:1px solid var(--line-dark)}
+.foot-map p{max-width:36ch}
+.gmap-foot{border-color:var(--line-dark)}
+@media (max-width:980px){.foot-map{grid-template-columns:1fr}}

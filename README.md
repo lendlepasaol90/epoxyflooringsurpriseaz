@@ -30,6 +30,7 @@ Built and audited with the UI/UX Pro Max skill. The source of truth is `design-s
 Entrance animation on the hero, count-up stats, staggered reveals, process timeline, ticker band, button gloss sweep, flake broadcast animation and a scroll-progress bar. All motion turns off automatically for visitors who enable "reduce motion" in their device settings.
 
 ## Interactive features
+- Google Map of Surprise, AZ in the footer of every page (no API key needed, lazy-loaded), with an "Open in Google Maps" link
 - Coating picker (space + priority → suggested system)
 - Flake blend preview (canvas, six blends, three chip sizes)
 - Gallery lightbox with keyboard support, FAQ accordions, copy-to-clipboard contact buttons, mobile call bar

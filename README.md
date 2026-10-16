@@ -7,6 +7,9 @@ Static HTML, no build step. Preview locally with `python3 -m http.server` from t
 ## Design
 Industrial red and white theme: safety red `#D21F26` on white, charcoal bands, chamfered corners, hazard-stripe dividers. Fonts are Barlow Condensed (headings), Barlow (body) and IBM Plex Mono (labels) from Google Fonts. All styles are in `assets/site.css` and all behavior in `assets/site.js`, shared by every page.
 
+## Design system
+Built and audited with the UI/UX Pro Max skill. The source of truth is `design-system/epoxy-flooring-surprise-az/MASTER.md`, with page overrides in `pages/home.md` and `pages/service.md`. It lists every color token with its contrast ratio, the type scale, components and the pre-delivery checklist the site passes.
+
 ## Pages
 - `index.html` (home)
 - Nine service pages, each in its own folder so URLs have no `.html` (e.g. `garage-floor-coatings/index.html` is served at `/garage-floor-coatings/`), linked from the Services dropdown
@@ -16,6 +19,7 @@ Industrial red and white theme: safety red `#D21F26` on white, charcoal bands, c
 - **Logo:** the header and footer show a red "S" mark with text. Replace the `.brand` link contents with `<img src="/assets/logo.png" alt="Epoxy Flooring Surprise AZ" height="48">` on each page.
 - **Favicon:** pages already link `/assets/favicon.ico`, `/assets/favicon-32.png` and `/assets/apple-touch-icon.png`. Drop those three files into `assets/`.
 - **Phone and email** are placeholders: (623) 555-0172 and info@epoxyflooringsurpriseaz.com
+- **Trust strip:** add license number, insurance and warranty items once confirmed (see the comment in the `trust()` builder, or add an `<li>` to the `.trust` list on each page). Real customer reviews would complete the skill's "social proof before CTA" recommendation.
 - **Forms** (hero quote form and estimate form) are front-end only with validation; connect them to a form service before launch
 - Photos in `assets/photos` are from the same Envato Elements set used on the other sites (Lifetime Commercial License, account: Danny)
 

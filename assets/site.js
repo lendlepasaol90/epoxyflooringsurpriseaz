@@ -4,12 +4,22 @@
   var $=function(s,c){return (c||document).querySelector(s)};
   var $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
 
+  /* Keep keyboard focus inside an open dialog (UI/UX Pro Max: no keyboard traps out of modals) */
+  var trap=function(box,e){
+    if(e.key!=='Tab')return;
+    var f=$$('a[href],button:not([disabled]),input,select,textarea',box).filter(function(x){return x.offsetParent!==null});
+    if(!f.length)return;var a=f[0],z=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}
+    else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}
+  };
+
   /* Services dropdown */
   var ddBtn=$('#ddBtn'),dd=$('#dd');
   if(ddBtn&&dd){
     var setDD=function(open){dd.classList.toggle('open',open);ddBtn.setAttribute('aria-expanded',open?'true':'false')};
     ddBtn.addEventListener('click',function(e){e.stopPropagation();setDD(!dd.classList.contains('open'))});
     document.addEventListener('click',function(e){if(!dd.contains(e.target))setDD(false)});
+    ddBtn.parentElement.addEventListener('focusout',function(e){if(!ddBtn.parentElement.contains(e.relatedTarget))setDD(false)});
     document.addEventListener('keydown',function(e){if(e.key==='Escape'&&dd.classList.contains('open')){setDD(false);ddBtn.focus()}});
   }
 
@@ -24,27 +34,36 @@
     burger.addEventListener('click',function(){setMM(true)});
     mclose&&mclose.addEventListener('click',function(){setMM(false)});
     $$('a',mm).forEach(function(a){a.addEventListener('click',function(){mm.classList.remove('open');document.body.style.overflow='';burger.setAttribute('aria-expanded','false');mm.setAttribute('aria-hidden','true')})});
-    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&mm.classList.contains('open'))setMM(false)});
+    document.addEventListener('keydown',function(e){if(!mm.classList.contains('open'))return;if(e.key==='Escape')setMM(false);trap(mm,e)});
   }
 
-  /* Lead forms: front-end validation only (connect to a form service before launch) */
+  /* Lead forms: validate on blur and on submit, show loading then success.
+     Front-end only: connect to a form service before launch. */
+  var check=function(inp){
+    var wrap=inp.closest('.field'),v=inp.value.trim(),bad=inp.required&&!v;
+    if(!bad&&v&&inp.type==='email')bad=!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+    if(!bad&&v&&inp.type==='tel')bad=v.replace(/\D/g,'').length<10;
+    if(wrap){wrap.classList.toggle('err',bad);wrap.classList.toggle('ok',!bad&&!!v)}
+    inp.setAttribute('aria-invalid',bad?'true':'false');
+    var msg=wrap&&$('.msg',wrap);
+    if(msg){if(!msg.id)msg.id=(inp.id||'f')+'-msg';bad?inp.setAttribute('aria-describedby',msg.id):inp.removeAttribute('aria-describedby')}
+    return !bad;
+  };
   $$('form.lead-form').forEach(function(f){
+    $$('input,select,textarea',f).forEach(function(inp){
+      inp.addEventListener('blur',function(){if(inp.value.trim()||inp.dataset.touched)check(inp);inp.dataset.touched='1'});
+      inp.addEventListener('input',function(){var w=inp.closest('.field');if(w&&w.classList.contains('err'))check(inp)});
+      inp.addEventListener('change',function(){if(inp.tagName==='SELECT')check(inp)});
+    });
     f.addEventListener('submit',function(e){
       e.preventDefault();
-      var ok=true,first=null;
-      $$('[required]',f).forEach(function(inp){
-        var wrap=inp.closest('.field'),v=inp.value.trim(),bad=!v;
-        if(!bad&&inp.type==='email')bad=!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
-        if(!bad&&inp.type==='tel')bad=v.replace(/\D/g,'').length<10;
-        wrap&&wrap.classList.toggle('err',bad);
-        inp.setAttribute('aria-invalid',bad?'true':'false');
-        if(bad){ok=false;first=first||inp}
-      });
-      if(!ok){first.focus();return}
-      var btn=$('button[type=submit]',f);if(btn){btn.disabled=true}
-      setTimeout(function(){var card=f.closest('.formcard');card&&card.classList.add('sent');var done=card&&$('.form-ok',card);done&&done.focus()},500);
+      var first=null;
+      $$('[required]',f).forEach(function(inp){if(!check(inp)&&!first)first=inp});
+      if(first){first.focus();return}
+      var btn=$('button[type=submit]',f),lbl=btn&&$('.lbl',btn);
+      if(btn){btn.disabled=true;btn.classList.add('loading');btn.setAttribute('aria-busy','true');if(lbl)lbl.textContent='Sending\u2026'}
+      setTimeout(function(){var card=f.closest('.formcard');card&&card.classList.add('sent');var done=card&&$('.form-ok',card);done&&done.focus()},900);
     });
-    $$('input,select,textarea',f).forEach(function(inp){inp.addEventListener('input',function(){var w=inp.closest('.field');w&&w.classList.remove('err')})});
   });
 
   /* Copy phone / email */
@@ -132,7 +151,7 @@
     $('.lb-prev',lb).addEventListener('click',function(){show(idx-1)});
     $('.lb-next',lb).addEventListener('click',function(){show(idx+1)});
     lb.addEventListener('click',function(e){if(e.target===lb)close()});
-    document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(idx-1);if(e.key==='ArrowRight')show(idx+1)});
+    document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;trap(lb,e);if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(idx-1);if(e.key==='ArrowRight')show(idx+1)});
   }
 
   /* On-page contents highlight (service pages) */

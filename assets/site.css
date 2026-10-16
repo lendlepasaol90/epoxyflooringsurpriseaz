@@ -74,13 +74,13 @@ section{padding:clamp(64px,9vw,120px) 0;position:relative}
 /* ---------- top bar + nav ---------- */
 .topbar{background:var(--char);color:#C9CDD2;font-size:14px}
 .topbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:40px}
-.topbar a{color:#fff;text-decoration:none;font-weight:600}
+.topbar a{color:#fff;text-decoration:none;font-weight:600;display:inline-flex;align-items:center;min-height:44px}
 .topbar span{display:inline-flex;align-items:center;gap:8px}
 .topbar .ico{width:16px;height:16px;color:var(--red)}
 .topbar .tb-hide{display:inline-flex}
 .nav{position:sticky;top:0;z-index:var(--z-nav);background:#fff;border-bottom:2px solid var(--ink)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:76px}
-.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+.brand{display:flex;align-items:center;gap:12px;min-height:48px;text-decoration:none;color:var(--ink)}
 .brand-mark{width:46px;height:46px;background:var(--red);color:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:26px;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
 .brand-txt{display:flex;flex-direction:column;line-height:1}
 .brand-txt b{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:.03em;text-transform:uppercase}
@@ -148,7 +148,7 @@ section{padding:clamp(64px,9vw,120px) 0;position:relative}
 .field input,.field select,.field textarea{width:100%;min-height:48px;padding:11px 14px;font:inherit;font-size:16.5px;color:var(--ink);background:var(--concrete);border:1.5px solid var(--line);border-radius:0;transition:border-color .15s,background-color .15s}
 .field textarea{min-height:110px;resize:vertical}
 .field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23151719' stroke-width='2.4'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px}
-.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--ink);background:#fff}
+.field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible,.field input:focus,.field select:focus,.field textarea:focus{outline:3px solid var(--red);outline-offset:1px;border-color:var(--ink);background:#fff}
 .field.err input,.field.err select,.field.err textarea{border-color:var(--red);background:var(--red-tint)}
 .field .msg{display:none;color:var(--red-dark);font-size:14px;margin-top:5px;font-weight:600}
 .field.err .msg{display:block}
@@ -199,8 +199,9 @@ section{padding:clamp(64px,9vw,120px) 0;position:relative}
 
 /* services grid */
 .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.svc{display:flex;flex-direction:column;background:#fff;border:2px solid var(--ink);text-decoration:none;color:var(--ink);transition:transform .2s var(--ease),box-shadow .2s var(--ease);cursor:pointer}
-.svc:hover{transform:translate(-4px,-4px);box-shadow:8px 8px 0 var(--red);color:var(--ink)}
+.svc{display:flex;flex-direction:column;background:#fff;border:2px solid var(--ink);text-decoration:none;color:var(--ink);transition:box-shadow .2s var(--ease),border-color .2s var(--ease);cursor:pointer}
+.svc:hover,.svc:focus-visible{box-shadow:6px 6px 0 var(--red);border-color:var(--red);color:var(--ink)}
+.svc:hover h3{color:var(--red-dark)}
 .svc-img{position:relative;aspect-ratio:16/10;overflow:hidden;border-bottom:2px solid var(--ink)}
 .svc-img img{width:100%;height:100%;object-fit:cover}
 .svc-img .num{position:absolute;left:0;top:0;background:var(--red);color:#fff;font-family:var(--mono);font-size:13px;padding:7px 11px;letter-spacing:.08em}
@@ -349,9 +350,9 @@ table.spec tbody tr:last-child>*{border-bottom:0}
 .cline{display:flex;align-items:center;gap:14px;padding:14px 16px;background:#fff;border:2px solid var(--ink)}
 .cline .ico{color:var(--red);width:26px;height:26px}
 .cline>div{min-width:0}
-.cline a{overflow-wrap:anywhere;font-family:var(--display);font-weight:700;font-size:24px;text-decoration:none;color:var(--ink);letter-spacing:.02em}
+.cline a{display:inline-flex;align-items:center;min-height:44px;overflow-wrap:anywhere;font-family:var(--display);font-weight:700;font-size:24px;text-decoration:none;color:var(--ink);letter-spacing:.02em}
 .cline small{display:block;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
-.cline .copy{margin-left:auto;min-height:40px;padding:0 14px;border:1.5px solid var(--ink);background:#fff;font:inherit;font-weight:600;font-size:14px;cursor:pointer}
+.cline .copy{margin-left:auto;min-height:44px;min-width:64px;padding:0 14px;border:1.5px solid var(--ink);background:#fff;font:inherit;font-weight:600;font-size:14px;cursor:pointer}
 .cline .copy:hover{background:var(--ink);color:#fff}
 .hint-list{list-style:none;padding:0;margin:0;display:grid;gap:8px}
 .hint-list li{display:flex;gap:10px;color:var(--muted);font-size:16px}
@@ -362,6 +363,7 @@ table.spec tbody tr:last-child>*{border-bottom:0}
 footer{background:var(--char);color:#B8BDC3;padding:clamp(56px,7vw,88px) 0 0;font-size:15.5px}
 .foot{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:clamp(24px,4vw,56px)}
 footer .brand{color:#fff;margin-bottom:16px}
+footer .brand-txt small,.mmenu .brand-txt small{color:#FF8A8F}
 footer h4{color:#fff;font-size:20px;margin-bottom:14px;letter-spacing:.06em}
 footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 footer a{color:#D5D8DC;text-decoration:none}
@@ -386,11 +388,15 @@ footer a:hover{color:#fff;text-decoration:underline}
 .toc a{display:flex;gap:10px;padding:8px 16px;color:var(--ink);text-decoration:none;font-weight:600;font-size:15.5px;border-left:3px solid transparent}
 .toc a::before{counter-increment:t;content:counter(t,decimal-leading-zero);font-family:var(--mono);font-size:11.5px;color:var(--red-dark);padding-top:3px;font-weight:500}
 .toc a:hover,.toc a.on{background:var(--concrete);border-left-color:var(--red)}
-.toc .btn{margin:6px 12px 14px;width:calc(100% - 24px);font-size:16px;min-height:46px}
+.toc .btn::before{content:none}
+.toc .btn{color:#fff;margin:6px 12px 14px;width:calc(100% - 24px);font-size:16px;min-height:46px}
 .prose>section{padding:0 0 clamp(48px,6vw,72px);scroll-margin-top:110px}
 .prose>section+section{padding-top:clamp(48px,6vw,72px);border-top:2px solid var(--line)}
 .prose h2{font-size:clamp(32px,4.2vw,50px)}
-.prose p{max-width:70ch}
+/* Barlow is narrow: 54ch ≈ 72 characters per line (UI/UX Pro Max line-length 65-75) */
+main p,.prose p{max-width:54ch}
+.lede,.faq-list .a p,.sec-head p{max-width:52ch}
+.form-note,.formcard p,.picker-out p{max-width:none}
 .prose .tag{margin-bottom:12px}
 .ben{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
 .ben article{border:2px solid var(--ink);padding:22px}
@@ -459,6 +465,8 @@ footer a:hover{color:#fff;text-decoration:underline}
 }
 @media (max-width:640px){
   body{font-size:17px;padding-bottom:64px}
+  .tag,.formcard-head p,.area-sub,.chip,.svc-body .spec,.crumbs,.field label,.stat span,.cline small,.framed .plate,.flake-canvas .plate,.gal figcaption small{font-size:13px}
+  .svc-body p,.ben p,.why p,.cond p,.care p,.space p,.opt2 p{font-size:16.5px}
   .topbar .tb-hide{display:none}
   .topbar .wrap{justify-content:center}
   .nav-cta .btn{display:none}
@@ -483,3 +491,21 @@ footer a:hover{color:#fff;text-decoration:underline}
   .callbar .ico{width:20px;height:20px}
   .lb .lb-prev,.lb .lb-next{top:auto;bottom:14px;translate:none}
 }
+
+/* submit loading state (UI/UX Pro Max: submit feedback) */
+.btn .spin{display:none;width:18px;height:18px;border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+.btn.loading .spin{display:inline-block}
+.btn.loading svg{display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.field.ok input,.field.ok select{border-color:#2F7D4F}
+
+/* trust strip (UI/UX Pro Max: Conversion-Optimized + Trust pattern) */
+.trust{padding:0;border-bottom:2px solid var(--ink);background:#fff}
+.trust ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr)}
+.trust li{display:flex;gap:12px;align-items:flex-start;padding:22px 20px;border-right:1px solid var(--line)}
+.trust li:last-child{border-right:0}
+.trust .ico{color:var(--red);width:28px;height:28px;margin-top:2px}
+.trust b{display:block;font-family:var(--display);font-weight:700;font-size:19px;text-transform:uppercase;letter-spacing:.03em;line-height:1.1}
+.trust small{display:block;color:var(--muted);font-size:15px;margin-top:3px}
+@media (max-width:980px){.trust ul{grid-template-columns:1fr 1fr}.trust li:nth-child(2){border-right:0}.trust li:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+@media (max-width:640px){.trust li{padding:16px 10px 16px 0}.trust b{font-size:17px}.trust small{font-size:14px}}

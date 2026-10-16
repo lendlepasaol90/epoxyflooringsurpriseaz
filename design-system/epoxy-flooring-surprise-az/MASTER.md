@@ -79,6 +79,26 @@ Light theme only (red, graphite black, white) on every device, by client choice.
 - **Dialogs (lightbox, mobile menu):** Escape closes, focus moves in and returns, Tab is trapped inside
 - **Icons:** official Lucide icons, inline SVG, 24×24 viewBox, 1.8 stroke. No emojis.
 
+## Motion
+
+All motion uses transform/opacity, ease-out curves, and is disabled under `prefers-reduced-motion: reduce`.
+
+| Element | Motion | Timing |
+|---------|--------|--------|
+| Hero | Photo push-in; tag, H1, lede, chips, buttons rise in sequence; red H1 line wipes in; form slides from right | 0.05–0.8s stagger, once |
+| Hazard stripe under hero | Slow drift like caution tape | 2.4s loop |
+| Stats | Count up when 60% visible | 1.1s, ease-out cubic |
+| Card grids, steps, trust strip | Children reveal one after another | 70ms stagger, 0.55s each |
+| Process | Red line draws across, step markers pop | 1.4s line, 180ms per marker |
+| Ticker (home) | Red band of process words scrolls; pauses on hover | 38s loop |
+| Buttons | Gloss sweep on hover | 0.6s |
+| Service photos | 1.05 zoom inside frame on hover (no layout shift) | 0.5s |
+| FAQ, picker result | Content rises in when opened/changed | 0.3s |
+| Flake preview | Chips land in random order on blend change | 0.65s |
+| Header | Red scroll-progress bar | scroll-linked |
+
+A scroll sweep reveals anything already passed, so fast jumps never leave content hidden.
+
 ---
 
 ## Anti-Patterns (Do NOT Use)

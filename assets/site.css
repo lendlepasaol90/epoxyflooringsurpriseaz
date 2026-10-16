@@ -530,3 +530,65 @@ footer .brand-plate img{height:72px}
 .hero h1 em,.step::before{color:var(--red-bright)}
 .hero .ico,.topbar .ico,.dark .ico,.callout .ico,.area-list .ico{color:var(--red-bright)}
 .btn .ico,.hero .btn .ico,.dark .btn .ico{color:inherit}
+
+/* =========================================================
+   Motion design
+   UI/UX Pro Max: transform/opacity only, 150-300ms micro-interactions,
+   ease-out on enter, everything gated behind prefers-reduced-motion.
+   ========================================================= */
+.progress{position:absolute;left:0;right:0;bottom:-2px;height:3px;pointer-events:none}
+.progress span{display:block;height:100%;background:var(--red);transform-origin:0 50%;transform:scaleX(0)}
+.ticker{background:var(--red);color:#fff;overflow:hidden;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:0}
+.ticker-track{display:flex;align-items:center;width:max-content;gap:28px;padding:16px 0}
+.ticker span{font-family:var(--display);font-weight:800;font-size:clamp(22px,2.6vw,32px);text-transform:uppercase;letter-spacing:.04em;white-space:nowrap}
+.ticker i{width:12px;height:12px;background:#fff;transform:rotate(45deg);flex:none}
+.btn{position:relative;overflow:hidden;isolation:isolate}
+.btn::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.28) 50%,transparent 70%);transform:translateX(-120%)}
+.svc-img img,.related .svc-img img{transition:transform .5s var(--ease)}
+.svc:hover .svc-img img{transform:scale(1.05)}
+.steps{position:relative}
+.steps::after{content:"";position:absolute;left:0;right:0;top:-2px;height:2px;background:var(--red);transform-origin:0 50%;transform:scaleX(0)}
+
+@media (prefers-reduced-motion:no-preference){
+  /* hero entrance */
+  @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+  @keyframes wipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+  @keyframes slideIn{from{opacity:0;transform:translateX(36px)}to{opacity:1;transform:none}}
+  @keyframes pushIn{from{transform:scale(1.1)}to{transform:scale(1)}}
+  @keyframes tape{to{background-position:56px 0}}
+  .hero-bg img{animation:pushIn 2.2s var(--ease) both}
+  .hero .tag,.hero .crumbs{animation:rise .6s var(--ease) .05s both}
+  .hero h1{animation:rise .7s var(--ease) .12s both}
+  .hero h1 em{animation:wipe .75s cubic-bezier(.7,0,.2,1) .55s both}
+  .hero .lede{animation:rise .6s var(--ease) .35s both}
+  .hero .chips{animation:rise .6s var(--ease) .45s both}
+  .hero-actions{animation:rise .6s var(--ease) .55s both}
+  .hero-meta{animation:rise .6s var(--ease) .65s both}
+  .hero .formcard{animation:slideIn .8s var(--ease) .3s both}
+  .hero::after{animation:tape 2.4s linear infinite}
+
+  /* ticker */
+  @keyframes marquee{to{transform:translateX(-50%)}}
+  .ticker-track{animation:marquee 38s linear infinite}
+  .ticker:hover .ticker-track{animation-play-state:paused}
+
+  /* button gloss sweep */
+  .btn:hover::after{transform:translateX(120%);transition:transform .6s var(--ease)}
+
+  /* staggered reveals */
+  .stagger>*{opacity:0;transform:translateY(22px);transition:opacity .55s var(--ease),transform .55s var(--ease);transition-delay:calc(var(--i,0) * 70ms)}
+  .stagger.in>*{opacity:1;transform:none}
+
+  /* process timeline */
+  .steps::after{transition:transform 1.4s cubic-bezier(.6,0,.2,1) .1s}
+  .steps.in::after{transform:scaleX(1)}
+  .steps.in .step::after{animation:pop .35s var(--ease) both;animation-delay:calc(var(--i,0) * 180ms + .2s)}
+  @keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.35)}100%{transform:scale(1)}}
+
+  /* small UI motion */
+  .faq-list details[open] .a{animation:rise .3s var(--ease) both}
+  .picker-out.swap h3,.picker-out.swap #pkD,.picker-out.swap dl{animation:rise .3s var(--ease) both}
+  .tag::before{transition:transform .3s var(--ease)}
+  .rv.in .tag::before,.sec-head.in .tag::before{animation:spinIn .5s var(--ease) both}
+  @keyframes spinIn{from{transform:rotate(-90deg) scale(0)}to{transform:none}}
+}

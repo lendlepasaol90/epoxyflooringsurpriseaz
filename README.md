@@ -26,6 +26,9 @@ Built and audited with the UI/UX Pro Max skill. The source of truth is `design-s
 - **Forms** (hero quote form and estimate form) are front-end only with validation; connect them to a form service before launch
 - Photos in `assets/photos` are from the same Envato Elements set used on the other sites (Lifetime Commercial License, account: Danny)
 
+## Motion
+Entrance animation on the hero, count-up stats, staggered reveals, process timeline, ticker band, button gloss sweep, flake broadcast animation and a scroll-progress bar. All motion turns off automatically for visitors who enable "reduce motion" in their device settings.
+
 ## Interactive features
 - Coating picker (space + priority → suggested system)
 - Flake blend preview (canvas, six blends, three chip sizes)

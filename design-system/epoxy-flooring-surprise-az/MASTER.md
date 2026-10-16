@@ -43,6 +43,28 @@
 
 Rule: never put `--red-dark` text on `--char`; use `#FF8A8F` or white.
 
+### Dark mode (`prefers-color-scheme: dark`)
+
+| Token | Light | Dark |
+|-------|-------|------|
+| `--surface` | `#FFFFFF` | `#121316` |
+| `--concrete` | `#F2F2F0` | `#1B1D20` |
+| `--ink` | `#151719` | `#ECEDEF` |
+| `--on-ink` (text on ink fills) | `#FFFFFF` | `#121316` |
+| `--muted` | `#565A5F` | `#A9AEB4` |
+| `--line` | `#D9D9D4` | `#33373C` |
+| `--red-dark` (red text) | `#A8141B` | `#FF7A7F` |
+| `--char` (dark bands) | `#141414` | `#0A0A0B` |
+
+`--red` and `--red-hover` stay the same in both modes. Never hard-code `#fff` as a surface; use `--surface`.
+
+## Logo & icons
+
+- Header (light): `assets/logo.png` / `.webp`, wide lockup, 64px tall (52px on phones)
+- Header (dark), footer, mobile menu: `assets/logo-badge.png` / `.webp` square badge (the wide logo's black lettering disappears on dark)
+- Favicons: `favicon.ico` (16/32/48), `favicon-32.png`, `apple-touch-icon.png` (180), `icon-192.png`, `icon-512.png` via `site.webmanifest`
+- UI icons: official Lucide set (ISC license), inline SVG, 24×24 viewBox
+
 ## Typography
 
 - **Headings:** Barlow Condensed 700/800, uppercase, line-height .9–1.05
@@ -66,7 +88,7 @@ Rule: never put `--red-dark` text on `--char`; use `#FF8A8F` or white.
 - **Inputs:** 48px min height, 1.5px border, focus = 3px red outline + ink border, error = red border + tint + text message linked via `aria-describedby`
 - **Forms:** hero form 3 fields (name, phone, project); validate on blur and submit; button shows spinner + "Sending…" then a success panel with `role="status"`
 - **Dialogs (lightbox, mobile menu):** Escape closes, focus moves in and returns, Tab is trapped inside
-- **Icons:** one inline SVG set, 24×24 viewBox, 1.8 stroke. No emojis.
+- **Icons:** official Lucide icons, inline SVG, 24×24 viewBox, 1.8 stroke. No emojis.
 
 ---
 
@@ -83,10 +105,11 @@ Rule: never put `--red-dark` text on `--char`; use `#FF8A8F` or white.
 
 ---
 
-## Pre-Delivery Checklist (last audit: all 10 pages at 375 / 768 / 1024 / 1440)
+## Pre-Delivery Checklist (last audit: all 10 pages at 375 / 768 / 1024 / 1440, light and dark)
 
 - [x] No emojis used as icons
-- [x] Consistent icon set
+- [x] Consistent icon set (Lucide)
+- [x] Light and dark mode both tested
 - [x] `cursor: pointer` on all clickable elements
 - [x] Hover transitions 150–300ms, no layout shift
 - [x] Text contrast ≥ 4.5:1 (≥ 3:1 for large text)

@@ -19,7 +19,7 @@ Built and audited with the UI/UX Pro Max skill. The source of truth is `design-s
 - **Logo:** the header and footer show a red "S" mark with text. Replace the `.brand` link contents with `<img src="/assets/logo.png" alt="Epoxy Flooring Surprise AZ" height="48">` on each page.
 - **Favicon:** pages already link `/assets/favicon.ico`, `/assets/favicon-32.png` and `/assets/apple-touch-icon.png`. Drop those three files into `assets/`.
 - **Phone and email** are placeholders: (623) 555-0172 and info@epoxyflooringsurpriseaz.com
-- **Trust strip:** add license number, insurance and warranty items once confirmed (see the comment in the `trust()` builder, or add an `<li>` to the `.trust` list on each page). Real customer reviews would complete the skill's "social proof before CTA" recommendation.
+- **Trust strip:** add license number, insurance and warranty items once confirmed by adding an `<li>` to the `.trust` list near the top of each page. Real customer reviews would complete the skill's "social proof before CTA" recommendation.
 - **Forms** (hero quote form and estimate form) are front-end only with validation; connect them to a form service before launch
 - Photos in `assets/photos` are from the same Envato Elements set used on the other sites (Lifetime Commercial License, account: Danny)
 

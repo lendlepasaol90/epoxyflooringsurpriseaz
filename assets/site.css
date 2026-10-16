@@ -9,13 +9,13 @@
   --white:#FFFFFF;
   --concrete:#F2F2F0;
   --concrete-2:#E7E7E3;
-  --char:#141414;
-  --steel:#24272B;
-  --steel-2:#33373C;
+  --char:#2A2C30;
+  --steel:#3A3D42;
+  --steel-2:#45484E;
   --ink:#151719;
   --muted:#565A5F;
   --line:#D9D9D4;
-  --line-dark:#3A3E43;
+  --line-dark:#4A4E55;
   --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
   --body:"Barlow","Helvetica Neue",Arial,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
@@ -28,6 +28,7 @@
   --on-ink:#FFFFFF;
   --black:#151719;
   --red-hover:#A8141B;
+  --red-bright:#FF3B42;
   color-scheme:light dark;
 }
 *,*::before,*::after{box-sizing:border-box}
@@ -126,7 +127,7 @@ section{padding:clamp(64px,9vw,120px) 0;position:relative}
 .hero{position:relative;color:#fff;background:var(--char);padding:clamp(48px,7vw,96px) 0 clamp(56px,7vw,96px);overflow:hidden;isolation:isolate}
 .hero-bg{position:absolute;inset:0;z-index:-2}
 .hero-bg img{width:100%;height:100%;object-fit:cover}
-.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(14,14,14,.94) 0%,rgba(14,14,14,.84) 46%,rgba(14,14,14,.5) 100%)}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(32,34,38,.95) 0%,rgba(32,34,38,.86) 46%,rgba(32,34,38,.55) 100%)}
 .hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:10px;background:repeating-linear-gradient(-45deg,var(--red) 0 14px,#fff 14px 28px)}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(28px,5vw,72px);align-items:center}
 .hero h1{color:#fff;font-size:clamp(50px,8.4vw,112px);line-height:.88;margin-bottom:22px}
@@ -345,7 +346,7 @@ table.spec tbody tr:last-child>*{border-bottom:0}
 .area-list{padding:0;margin:0}
 .area-sub{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#A7ACB2;margin:26px 0 10px}
 .dark .chip{color:#fff;border-color:#5A5F65}
-.map{position:relative;border:2px solid var(--line-dark);background:#24272B}
+.map{position:relative;border:2px solid var(--line-dark);background:#33363B}
 .map svg{display:block;width:100%;height:auto}
 
 /* estimate */
@@ -372,7 +373,7 @@ footer h4{color:#fff;font-size:20px;margin-bottom:14px;letter-spacing:.06em}
 footer ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 footer a{color:#D5D8DC;text-decoration:none}
 footer a:hover{color:#fff;text-decoration:underline}
-.foot-big{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:clamp(56px,13vw,200px);line-height:.8;color:#1F2124;letter-spacing:-.01em;margin-top:clamp(40px,6vw,72px);white-space:nowrap;overflow:hidden;user-select:none}
+.foot-big{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:clamp(56px,13vw,200px);line-height:.8;color:#36393E;letter-spacing:-.01em;margin-top:clamp(40px,6vw,72px);white-space:nowrap;overflow:hidden;user-select:none}
 .foot-base{border-top:1px solid var(--line-dark);padding:20px 0 28px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:14px}
 
 /* mobile call bar */
@@ -519,7 +520,7 @@ main p,.prose p{max-width:54ch}
   :root{
     --surface:#121316;--white:#121316;--concrete:#1B1D20;--concrete-2:#24272B;
     --ink:#ECEDEF;--on-ink:#121316;--muted:#A9AEB4;--steel:#C9CDD2;
-    --line:#33373C;--red-dark:#FF7A7F;--red-tint:#3A1517;--char:#0A0A0B;
+    --line:#33373C;--red-dark:#FF7A7F;--red-tint:#3A1517;--char:#23252A;
   }
   img{filter:none}
   .field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23ECEDEF' stroke-width='2.4'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")}
@@ -536,3 +537,8 @@ main p,.prose p{max-width:54ch}
 .mmenu .brand-badge img{height:60px;width:60px}
 footer .brand-badge{margin-bottom:18px}
 @media (max-width:640px){.brand img{height:52px}.nav .wrap{min-height:72px}}
+
+/* red text and icons on graphite sections: brighter red keeps >= 3:1 (large text / UI graphics) */
+.hero h1 em,.step::before{color:var(--red-bright)}
+.hero .ico,.topbar .ico,.dark .ico,.callout .ico,.area-list .ico{color:var(--red-bright)}
+.btn .ico,.hero .btn .ico,.dark .btn .ico{color:inherit}

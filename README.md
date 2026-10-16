@@ -5,7 +5,7 @@ Website for Epoxy Flooring Surprise AZ (epoxyflooringsurpriseaz.com), a floor co
 Static HTML, no build step. Preview locally with `python3 -m http.server` from this folder and open http://localhost:8000 (opening the files directly won't resolve the root paths).
 
 ## Design
-Industrial red and white theme, with automatic dark mode: safety red `#D21F26` on white, charcoal bands, chamfered corners, hazard-stripe dividers. Fonts are Barlow Condensed (headings), Barlow (body) and IBM Plex Mono (labels) from Google Fonts. All styles are in `assets/site.css` and all behavior in `assets/site.js`, shared by every page.
+Industrial red and white theme, with automatic dark mode: safety red `#D21F26` on white, graphite black bands (`#2A2C30`), chamfered corners, hazard-stripe dividers. Fonts are Barlow Condensed (headings), Barlow (body) and IBM Plex Mono (labels) from Google Fonts. All styles are in `assets/site.css` and all behavior in `assets/site.js`, shared by every page.
 
 ## Logo & favicon
 - `assets/logo.png` / `logo.webp`: wide logo, white background removed, used in the header

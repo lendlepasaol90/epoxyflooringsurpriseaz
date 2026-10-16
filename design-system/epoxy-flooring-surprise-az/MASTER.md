@@ -35,13 +35,13 @@
 | Error tint | `#FCECEC` | `--red-tint` | |
 | Background | `#FFFFFF` | `--white` | |
 | Section gray | `#F2F2F0` | `--concrete` | |
-| Dark sections | `#141414` | `--char` | White text 18.4:1 |
+| Dark sections (graphite black) | `#2A2C30` | `--char` | White text 14:1, `#B8BDC3` 7.4:1 |
 | Body text | `#151719` | `--ink` | 18:1 on white |
 | Muted text | `#565A5F` | `--muted` | 6.9:1 on white |
 | Borders | `#D9D9D4` / `#151719` | `--line` / `--ink` | |
-| Red on dark | `#FF8A8F` | (footer label) | 8.1:1 on `--char` |
+| Red on graphite | `#FF3B42` | `--red-bright` | 4:1 on `--char`; hero H1 accent, step numbers, icons on dark |
 
-Rule: never put `--red-dark` text on `--char`; use `#FF8A8F` or white.
+Rule: red text or icons on `--char` use `--red-bright`, never `--red` or `--red-dark`. Buttons keep `--red` with white text.
 
 ### Dark mode (`prefers-color-scheme: dark`)
 
@@ -54,7 +54,7 @@ Rule: never put `--red-dark` text on `--char`; use `#FF8A8F` or white.
 | `--muted` | `#565A5F` | `#A9AEB4` |
 | `--line` | `#D9D9D4` | `#33373C` |
 | `--red-dark` (red text) | `#A8141B` | `#FF7A7F` |
-| `--char` (dark bands) | `#141414` | `#0A0A0B` |
+| `--char` (dark bands) | `#2A2C30` | `#23252A` |
 
 `--red` and `--red-hover` stay the same in both modes. Never hard-code `#fff` as a surface; use `--surface`.
 

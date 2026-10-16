@@ -532,10 +532,14 @@ main p,.prose p{max-width:54ch}
 
 /* logo */
 .brand picture{display:block}
-.brand img{height:64px;width:auto}
-.brand-badge img{height:88px;width:88px}
-.mmenu .brand-badge img{height:60px;width:60px}
-footer .brand-badge{margin-bottom:18px}
+.brand img{height:70px;width:auto}
+.nav .wrap{min-height:86px}
+/* white plate keeps the black lettering readable on graphite */
+.brand-plate{background:#fff;padding:8px 12px;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
+footer .brand-plate{margin-bottom:18px;display:inline-flex}
+footer .brand-plate img{height:72px}
+.mmenu .brand-plate img{height:48px}
+@media (prefers-color-scheme:dark){.nav .brand{background:#fff;padding:6px 10px;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}.nav .brand img{height:56px}}
 @media (max-width:640px){.brand img{height:52px}.nav .wrap{min-height:72px}}
 
 /* red text and icons on graphite sections: brighter red keeps >= 3:1 (large text / UI graphics) */

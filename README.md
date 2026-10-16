@@ -8,9 +8,8 @@ Static HTML, no build step. Preview locally with `python3 -m http.server` from t
 Industrial red and white theme, with automatic dark mode: safety red `#D21F26` on white, graphite black bands (`#2A2C30`), chamfered corners, hazard-stripe dividers. Fonts are Barlow Condensed (headings), Barlow (body) and IBM Plex Mono (labels) from Google Fonts. All styles are in `assets/site.css` and all behavior in `assets/site.js`, shared by every page.
 
 ## Logo & favicon
-- `assets/logo.png` / `logo.webp`: wide logo, white background removed, used in the header
-- `assets/logo-badge.png` / `logo-badge.webp`: square badge, used in the footer, mobile menu and the header in dark mode
-- Favicons: `assets/favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png` and `site.webmanifest`
+- `assets/logo.png` / `logo.webp`: red and black logo, white background removed. Shown on a white plate in the footer, mobile menu and dark-mode header
+- Favicons are cropped from the logo's sun and mountains: `assets/favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png` and `site.webmanifest`
 - Icons in the UI are from Lucide (ISC license)
 
 ## Design system

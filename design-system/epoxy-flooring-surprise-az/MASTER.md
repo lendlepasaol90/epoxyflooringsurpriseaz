@@ -60,9 +60,9 @@ Rule: red text or icons on `--char` use `--red-bright`, never `--red` or `--red-
 
 ## Logo & icons
 
-- Header (light): `assets/logo.png` / `.webp`, wide lockup, 64px tall (52px on phones)
-- Header (dark), footer, mobile menu: `assets/logo-badge.png` / `.webp` square badge (the wide logo's black lettering disappears on dark)
-- Favicons: `favicon.ico` (16/32/48), `favicon-32.png`, `apple-touch-icon.png` (180), `icon-192.png`, `icon-512.png` via `site.webmanifest`
+- Logo: `assets/logo.png` / `.webp`, red and black wide lockup, 70px tall in the header (52px on phones)
+- On graphite (footer, mobile menu, header in dark mode) the logo sits on a white chamfered plate (`.brand-plate`) so the black lettering stays readable
+- Favicons: sun-and-mountain crop of the logo on a white tile: `favicon.ico` (16/32/48), `favicon-32.png`, `apple-touch-icon.png` (180), `icon-192.png`, `icon-512.png` via `site.webmanifest`
 - UI icons: official Lucide set (ISC license), inline SVG, 24×24 viewBox
 
 ## Typography

@@ -43,25 +43,14 @@
 
 Rule: red text or icons on `--char` use `--red-bright`, never `--red` or `--red-dark`. Buttons keep `--red` with white text.
 
-### Dark mode (`prefers-color-scheme: dark`)
+### Theme
 
-| Token | Light | Dark |
-|-------|-------|------|
-| `--surface` | `#FFFFFF` | `#121316` |
-| `--concrete` | `#F2F2F0` | `#1B1D20` |
-| `--ink` | `#151719` | `#ECEDEF` |
-| `--on-ink` (text on ink fills) | `#FFFFFF` | `#121316` |
-| `--muted` | `#565A5F` | `#A9AEB4` |
-| `--line` | `#D9D9D4` | `#33373C` |
-| `--red-dark` (red text) | `#A8141B` | `#FF7A7F` |
-| `--char` (dark bands) | `#2A2C30` | `#23252A` |
-
-`--red` and `--red-hover` stay the same in both modes. Never hard-code `#fff` as a surface; use `--surface`.
+Light theme only (red, graphite black, white) on every device, by client choice. No automatic dark mode. Never hard-code `#fff` as a surface; use `--surface`.
 
 ## Logo & icons
 
 - Logo: `assets/logo.png` / `.webp`, red and black wide lockup, 70px tall in the header (52px on phones)
-- On graphite (footer, mobile menu, header in dark mode) the logo sits on a white chamfered plate (`.brand-plate`) so the black lettering stays readable
+- On graphite (footer, mobile menu) the logo sits on a white chamfered plate (`.brand-plate`) so the black lettering stays readable
 - Favicons: square logo on a white rounded tile: `favicon.ico` (16/32/48), `favicon-32.png`, `apple-touch-icon.png` (180), `icon-192.png`, `icon-512.png` via `site.webmanifest`
 - UI icons: official Lucide set (ISC license), inline SVG, 24×24 viewBox
 
@@ -105,11 +94,11 @@ Rule: red text or icons on `--char` use `--red-bright`, never `--red` or `--red-
 
 ---
 
-## Pre-Delivery Checklist (last audit: all 10 pages at 375 / 768 / 1024 / 1440, light and dark)
+## Pre-Delivery Checklist (last audit: all 10 pages at 375 / 768 / 1024 / 1440)
 
 - [x] No emojis used as icons
 - [x] Consistent icon set (Lucide)
-- [x] Light and dark mode both tested
+- [x] Light theme forced on all devices (dark-mode devices tested)
 - [x] `cursor: pointer` on all clickable elements
 - [x] Hover transitions 150–300ms, no layout shift
 - [x] Text contrast ≥ 4.5:1 (≥ 3:1 for large text)

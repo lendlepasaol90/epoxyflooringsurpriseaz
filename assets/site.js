@@ -1,0 +1,156 @@
+/* Epoxy Flooring Surprise AZ: shared page behavior */
+(function(){
+  'use strict';
+  var $=function(s,c){return (c||document).querySelector(s)};
+  var $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+
+  /* Services dropdown */
+  var ddBtn=$('#ddBtn'),dd=$('#dd');
+  if(ddBtn&&dd){
+    var setDD=function(open){dd.classList.toggle('open',open);ddBtn.setAttribute('aria-expanded',open?'true':'false')};
+    ddBtn.addEventListener('click',function(e){e.stopPropagation();setDD(!dd.classList.contains('open'))});
+    document.addEventListener('click',function(e){if(!dd.contains(e.target))setDD(false)});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&dd.classList.contains('open')){setDD(false);ddBtn.focus()}});
+  }
+
+  /* Mobile menu */
+  var burger=$('#burger'),mm=$('#mmenu'),mclose=$('#mclose');
+  if(burger&&mm){
+    var setMM=function(open){
+      mm.classList.toggle('open',open);burger.setAttribute('aria-expanded',open?'true':'false');
+      mm.setAttribute('aria-hidden',open?'false':'true');document.body.style.overflow=open?'hidden':'';
+      if(open){mclose&&mclose.focus()}else{burger.focus()}
+    };
+    burger.addEventListener('click',function(){setMM(true)});
+    mclose&&mclose.addEventListener('click',function(){setMM(false)});
+    $$('a',mm).forEach(function(a){a.addEventListener('click',function(){mm.classList.remove('open');document.body.style.overflow='';burger.setAttribute('aria-expanded','false');mm.setAttribute('aria-hidden','true')})});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&mm.classList.contains('open'))setMM(false)});
+  }
+
+  /* Lead forms: front-end validation only (connect to a form service before launch) */
+  $$('form.lead-form').forEach(function(f){
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      var ok=true,first=null;
+      $$('[required]',f).forEach(function(inp){
+        var wrap=inp.closest('.field'),v=inp.value.trim(),bad=!v;
+        if(!bad&&inp.type==='email')bad=!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+        if(!bad&&inp.type==='tel')bad=v.replace(/\D/g,'').length<10;
+        wrap&&wrap.classList.toggle('err',bad);
+        inp.setAttribute('aria-invalid',bad?'true':'false');
+        if(bad){ok=false;first=first||inp}
+      });
+      if(!ok){first.focus();return}
+      var btn=$('button[type=submit]',f);if(btn){btn.disabled=true}
+      setTimeout(function(){var card=f.closest('.formcard');card&&card.classList.add('sent');var done=card&&$('.form-ok',card);done&&done.focus()},500);
+    });
+    $$('input,select,textarea',f).forEach(function(inp){inp.addEventListener('input',function(){var w=inp.closest('.field');w&&w.classList.remove('err')})});
+  });
+
+  /* Copy phone / email */
+  $$('[data-copy]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var t=b.getAttribute('data-copy'),label=b.textContent;
+      var done=function(){b.textContent='Copied';setTimeout(function(){b.textContent=label},1400)};
+      if(navigator.clipboard){navigator.clipboard.writeText(t).then(done,function(){})}else{done()}
+    });
+  });
+
+  /* Coating picker */
+  var picker=$('#picker');
+  if(picker){
+    var R={
+      garage:{
+        sun:{t:'Flake + Polyaspartic',d:'Full-broadcast chip over a bonded base, finished with a UV-stable polyaspartic clear. The everyday West Valley garage floor.',a:'Two-car and three-car garages, cart bays, open-door workspaces',c:'Usually 1 to 2 days',l:'/garage-floor-coatings/'},
+        tough:{t:'Polyurea Base System',d:'A flexible polyurea base that rides out slab movement, with a chip broadcast and a hard clear on top.',a:'RV bays, shops with jacks and stands, heavy storage',c:'Usually 1 to 2 days',l:'/polyurea-floor-coatings/'},
+        look:{t:'Metallic Epoxy',d:'Poured and hand-worked metallic pigments for a deep, marbled gloss that makes a collector garage feel like a showroom.',a:'Showroom garages, man caves, hobby rooms',c:'Usually 2 to 3 days',l:'/metallic-epoxy-flooring/'},
+        fast:{t:'Polyaspartic Chip Floor',d:'Fast-curing layers from base to clear so the garage is back in use sooner.',a:'Homeowners who can only give up the garage briefly',c:'Often 1 day',l:'/polyaspartic-floor-coatings/'}
+      },
+      home:{
+        sun:{t:'Residential Epoxy + UV Clear',d:'A solid or light flake interior system with a clear that resists yellowing near sliders and windows.',a:'Casitas, sunrooms, laundry and mudrooms',c:'Usually 2 days',l:'/residential-epoxy-flooring/'},
+        tough:{t:'Residential Epoxy, Solid Color',d:'A high-build solid color with a tough clear for rooms that see dumbbells, bikes and boots.',a:'Home gyms, craft rooms, workshops',c:'Usually 2 days',l:'/residential-epoxy-flooring/'},
+        look:{t:'Metallic Epoxy',d:'A seamless metallic floor with movement and depth, tuned to the room\'s light and color scheme.',a:'Living spaces, basements, bars and game rooms',c:'Usually 2 to 3 days',l:'/metallic-epoxy-flooring/'},
+        fast:{t:'Polyaspartic Interior Floor',d:'Quick cure and low wait time, with a clean solid or flake look.',a:'Rooms you need back quickly',c:'Often 1 day',l:'/polyaspartic-floor-coatings/'}
+      },
+      outdoor:{
+        sun:{t:'Patio & Concrete Coating',d:'A UV-stable, textured system that stays cooler-toned and keeps its color in full Arizona sun.',a:'Patios, pool decks, walkways, entries',c:'Usually 1 to 2 days',l:'/patio-concrete-coatings/'},
+        tough:{t:'Polyurea Exterior System',d:'Flexible polyurea for exterior slabs that expand and contract through wide day-to-night temperature swings.',a:'Driveway aprons, side yards, RV pads',c:'Usually 1 to 2 days',l:'/polyurea-floor-coatings/'},
+        look:{t:'Decorative Flake Patio',d:'A chip blend matched to your stucco and pavers, sealed with a slip-resistant clear.',a:'Backyards, outdoor kitchens, courtyards',c:'Usually 1 to 2 days',l:'/decorative-flake-flooring/'},
+        fast:{t:'Polyaspartic Patio Coat',d:'Fast cure means the patio is ready for furniture again sooner.',a:'Small patios and entries',c:'Often 1 day',l:'/polyaspartic-floor-coatings/'}
+      },
+      business:{
+        sun:{t:'Commercial Epoxy System',d:'A high-build epoxy floor with a chemical-resistant topcoat, specified for your traffic and cleaning routine.',a:'Shops, showrooms, offices, clinics',c:'Scheduled around your hours',l:'/commercial-epoxy-flooring/'},
+        tough:{t:'Warehouse Floor Coating',d:'Abrasion-resistant epoxy with forklift-rated build and painted safety lines.',a:'Warehouses, distribution and fabrication floors',c:'Phased by zone',l:'/warehouse-floor-coatings/'},
+        look:{t:'Commercial Decorative Flake',d:'A durable chip floor that reads clean and professional in customer-facing spaces.',a:'Showrooms, salons, gyms, retail',c:'Scheduled around your hours',l:'/decorative-flake-flooring/'},
+        fast:{t:'Polyaspartic Commercial Floor',d:'Fast-return coatings for businesses that cannot close for long.',a:'Overnight or weekend installs',c:'Often 1 day',l:'/polyaspartic-floor-coatings/'}
+      }
+    };
+    var out={t:$('#pkT'),d:$('#pkD'),a:$('#pkA'),c:$('#pkC'),l:$('#pkL')};
+    var upd=function(){
+      var s=($('input[name=pk-space]:checked',picker)||{}).value||'garage';
+      var p=($('input[name=pk-pri]:checked',picker)||{}).value||'sun';
+      var r=R[s][p];out.t.textContent=r.t;out.d.textContent=r.d;out.a.textContent=r.a;out.c.textContent=r.c;out.l.setAttribute('href',r.l);
+    };
+    $$('input',picker).forEach(function(i){i.addEventListener('change',upd)});upd();
+  }
+
+  /* Flake blend builder */
+  var cv=$('#flakeCanvas');
+  if(cv&&cv.getContext){
+    var ctx=cv.getContext('2d'),blendBtns=$$('.blend'),sizeBtns=$$('.sizes button'),nameEl=$('#blendName');
+    var cur={c:JSON.parse(blendBtns[0].getAttribute('data-c')),n:blendBtns[0].getAttribute('data-n'),s:1};
+    var seed=7;var rnd=function(){seed=(seed*16807)%2147483647;return (seed-1)/2147483646};
+    var draw=function(){
+      var w=cv.clientWidth||600,h=Math.round(w*.75),dpr=Math.min(window.devicePixelRatio||1,2);
+      cv.width=w*dpr;cv.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+      seed=7;ctx.fillStyle=cur.c[0];ctx.fillRect(0,0,w,h);
+      var n=Math.round(w*h/(70*cur.s*cur.s));
+      for(var i=0;i<n;i++){
+        var x=rnd()*w,y=rnd()*h,r=(2.2+rnd()*4.2)*cur.s;
+        ctx.fillStyle=cur.c[Math.floor(rnd()*cur.c.length)];
+        ctx.beginPath();var pts=5+Math.floor(rnd()*3),a0=rnd()*6.28;
+        for(var k=0;k<pts;k++){var a=a0+k*6.28/pts,rr=r*(.55+rnd()*.6);k?ctx.lineTo(x+Math.cos(a)*rr,y+Math.sin(a)*rr):ctx.moveTo(x+Math.cos(a)*rr,y+Math.sin(a)*rr)}
+        ctx.closePath();ctx.fill();
+      }
+      var g=ctx.createLinearGradient(0,0,w,h);g.addColorStop(0,'rgba(255,255,255,.16)');g.addColorStop(.5,'rgba(255,255,255,0)');g.addColorStop(1,'rgba(255,255,255,.08)');ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+      nameEl&&(nameEl.textContent=cur.n+' · '+(cur.s<1?'1/16" chip':cur.s>1?'1/2" chip':'1/4" chip'));
+    };
+    blendBtns.forEach(function(b){b.addEventListener('click',function(){blendBtns.forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true');cur.c=JSON.parse(b.getAttribute('data-c'));cur.n=b.getAttribute('data-n');draw()})});
+    sizeBtns.forEach(function(b){b.addEventListener('click',function(){sizeBtns.forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true');cur.s=parseFloat(b.getAttribute('data-s'));draw()})});
+    var t;window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(draw,150)});draw();
+  }
+
+  /* Gallery lightbox */
+  var gal=$$('.gal button'),lb=$('#lb');
+  if(gal.length&&lb){
+    var lbImg=$('img',lb),lbCap=$('figcaption',lb),idx=0,last=null;
+    var show=function(i){idx=(i+gal.length)%gal.length;var b=gal[idx];lbImg.src=b.getAttribute('data-full');lbImg.alt=$('img',b).alt;lbCap.textContent=b.getAttribute('data-cap')};
+    var open=function(i){last=document.activeElement;show(i);lb.classList.add('open');lb.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';$('.lb-x',lb).focus()};
+    var close=function(){lb.classList.remove('open');lb.setAttribute('aria-hidden','true');document.body.style.overflow='';last&&last.focus()};
+    gal.forEach(function(b,i){b.addEventListener('click',function(){open(i)})});
+    $('.lb-x',lb).addEventListener('click',close);
+    $('.lb-prev',lb).addEventListener('click',function(){show(idx-1)});
+    $('.lb-next',lb).addEventListener('click',function(){show(idx+1)});
+    lb.addEventListener('click',function(e){if(e.target===lb)close()});
+    document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(idx-1);if(e.key==='ArrowRight')show(idx+1)});
+  }
+
+  /* On-page contents highlight (service pages) */
+  var tocLinks=$$('.toc a[href^="#"]');
+  if(tocLinks.length&&'IntersectionObserver' in window){
+    var map={};tocLinks.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+    var io=new IntersectionObserver(function(ents){ents.forEach(function(en){if(en.isIntersecting){tocLinks.forEach(function(a){a.classList.remove('on')});var a=map[en.target.id];a&&a.classList.add('on')}})},{rootMargin:'-30% 0px -60% 0px'});
+    Object.keys(map).forEach(function(id){var s=document.getElementById(id);s&&io.observe(s)});
+  }
+
+  /* Reveal on scroll */
+  var rv=$$('.rv');
+  if(rv.length){
+    if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+      var ro=new IntersectionObserver(function(ents){ents.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');ro.unobserve(en.target)}})},{rootMargin:'0px 0px -8% 0px'});
+      rv.forEach(function(el){ro.observe(el)});
+    }else{rv.forEach(function(el){el.classList.add('in')})}
+  }
+
+  var yr=$('#yr');yr&&(yr.textContent=new Date().getFullYear());
+})();

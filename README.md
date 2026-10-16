@@ -9,7 +9,7 @@ Industrial red and white theme, with automatic dark mode: safety red `#D21F26` o
 
 ## Logo & favicon
 - `assets/logo.png` / `logo.webp`: red and black logo, white background removed. Shown on a white plate in the footer, mobile menu and dark-mode header
-- Favicons are cropped from the logo's sun and mountains: `assets/favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png` and `site.webmanifest`
+- Favicons come from the square logo on a white rounded tile: `assets/favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png` and `site.webmanifest`
 - Icons in the UI are from Lucide (ISC license)
 
 ## Design system
